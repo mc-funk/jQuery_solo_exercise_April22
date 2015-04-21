@@ -10,30 +10,45 @@ var lastName = "";
 $(document).ready(function(){
 	$(".personButton").on("click", function(){
 		i++;
+		var j = 0;
 		var newPerson = new Person();
-		$("#people").prepend("<li>Person " + i + ": <br>" 
+		/*$("#people").prepend("<li>Person " + i + ": <br>" 
 			+ newPerson.name + " is a " + newPerson.age + "-year-old " + newPerson.sex + 
-			" who weighs " + newPerson.weight + " pounds.</li>");
-		/*
-		$("#peopleTable").prepend("<tr id='person" + i + "'>" + newPerson.name + "</td></tr>");
-		$("#peopleTable").prepend("<tr id='person" + i + "'><td>Person "+ i + "<td></tr>");
+			" who weighs " + newPerson.weight + " pounds.</li>");*/
+		$("#peopleList").prepend("<li id=\"personName" + i + "\">" + newPerson.name + "<ul id=\"person" + i + "\"></ul></li>");	
+		attributeArray = ["", " years", " pounds"]	
 		for (var attribute in newPerson) {
-			$("#person" + i).append("<td>" + attribute + "</td>");
-		}*/
-		
+			if (attribute != "name") {
+				$("#person" + i).append("<li>" + attribute + ": " + eval("newPerson." + attribute) + " " 
+					+ attributeArray[j] + "</li>");
+				j++;
+			}
+		}
+	});
+	$(".removeButton").on("click", function(){
+			$("#personName" + i).remove();
+			i--;
+			//$('#list li').first().remove();
 	});
 });
+
+//$("#peopleTable").prepend("<li id='person" + i + "'Person "+ i + "<td></tr>");
+
 function Person(){
-	this.sex = binarySexes[randomNumber(0, 1)];
-	if (this.sex == "Male") {
+	var tempSex = binarySexes[randomNumber(0, 1)];
+	if (tempSex == "Male") {
 		firstName = maleFirstName[randomNumber(0,9)];
 	} else {
 		firstName = femaleFirstName[randomNumber(0,9)];
 	}
 	lastName = lastNames[randomNumber(0,9)];
 	this.name = firstName + " " + lastName;
+	this.sex = tempSex;
 	this.age = randomNumber(1, 100);
 	this.weight = randomNumber(1, 500);
+	/*this.remove = function() {
+
+	}*/
 }
 
 
