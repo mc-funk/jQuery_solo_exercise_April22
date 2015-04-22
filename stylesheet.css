@@ -37,9 +37,32 @@
 .personButton:active {
 	position:relative;
 	top:1px;
-}
+}m
 
 .removeButton {
+	box-shadow: 0px 10px 14px -7px #e67a73;
+	background-color: #e4685d
+	border-radius:8px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:arial;
+	font-size:11px;
+	font-weight:bold;
+	padding:13px 32px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #b23e35;
+}
+.removeButton:hover {
+	border-radius:8px;
+	background-color:#eb675e;
+}
+.removeButton:active {
+	position:relative;
+	top:1px;
+}
+
+.removeAllButton {
 	-moz-box-shadow: 0px 10px 14px -7px #e67a73;
 	-webkit-box-shadow: 0px 10px 14px -7px #e67a73;
 	box-shadow: 0px 10px 14px -7px #e67a73;
@@ -64,7 +87,7 @@
 	text-decoration:none;
 	text-shadow:0px 1px 0px #b23e35;
 }
-.removeButton:hover {
+.removeAllButton:hover {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #eb675e), color-stop(1, #e4685d));
 	background:-moz-linear-gradient(top, #eb675e 5%, #e4685d 100%);
 	background:-webkit-linear-gradient(top, #eb675e 5%, #e4685d 100%);
@@ -74,7 +97,7 @@
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#eb675e', endColorstr='#e4685d',GradientType=0);
 	background-color:#eb675e;
 }
-.removeButton:active {
+.removeAllButton:active {
 	position:relative;
 	top:1px;
 }

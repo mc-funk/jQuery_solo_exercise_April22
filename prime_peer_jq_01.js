@@ -15,7 +15,7 @@ $(document).ready(function(){
 		/*$("#people").prepend("<li>Person " + i + ": <br>" 
 			+ newPerson.name + " is a " + newPerson.age + "-year-old " + newPerson.sex + 
 			" who weighs " + newPerson.weight + " pounds.</li>");*/
-		$("#peopleList").prepend("<li id=\"personName" + i + "\">" + newPerson.name + "<ul id=\"person" + i + "\"></ul></li>");	
+		$("#peopleList").prepend("<div class='thisPerson' id=\"personName" + i + "\"><li>" + newPerson.name + "<ul id=\"person" + i + "\"></ul></li>");	
 		attributeArray = ["", " years", " pounds"]	
 		for (var attribute in newPerson) {
 			if (attribute != "name") {
@@ -24,12 +24,40 @@ $(document).ready(function(){
 				j++;
 			}
 		}
+		$("#person" + i).append("<li><button class='removeButton'>Remove</button></li>");
 	});
-	$(".removeButton").on("click", function(){
-			$("#personName" + i).remove();
-			i--;
-			//$('#list li').first().remove();
+
+//Use .empty() jQuery function to empty list of people
+	$(".removeAllButton").on("click", function(){
+		$("#peopleList").empty();
+		i = 0;
+		//console.log("this button worked at least");
 	});
+
+//Use .closest() jQuery to avoid doom chain of parents
+//Use .css() jQuery to change background color
+	$("#peopleList").on("click", ".removeButton", function(){
+		$(this).closest(".thisPerson").css("background-color", "#FF6666");
+		$(this).closest("ul").append("<li><button class='dblRemoveButton'>Double Click to Remove</button>&nbsp;<button class='resetButton'>Cancel</button></li>");
+		$(this).parent().remove();
+	});
+
+	$("#peopleList").on("click", ".resetButton", function(){
+		$(this).closest(".thisPerson").css("background-color", "#ffffff");
+		$(this).closest("ul").append("<li><button class='removeButton'>Remove</button></li>");
+		$(this).parent().remove();;
+	});
+
+//Use .on("dblclick"), which can also can be used as .dblclick, but 
+	$("#peopleList").on("dblclick", ".dblRemoveButton", function(event){
+		$(this).closest($(".thisPerson")).remove(); 
+		i--;
+		/*console.log("Here is 'this' : " , $(this).parent().parent().parent().parent());
+		console.log("Closest Test : " , $(this).closest($(".thisPerson")));*/
+		//$(this).parent().parent().parent().parent().remove(); //this works, but ...
+		//$(this).parent('.thisPerson').remove(); //Why didn't this work? PERIOD IN DEFINED CLASS NAME.
+	});
+
 });
 
 //$("#peopleTable").prepend("<li id='person" + i + "'Person "+ i + "<td></tr>");
@@ -46,9 +74,6 @@ function Person(){
 	this.sex = tempSex;
 	this.age = randomNumber(1, 100);
 	this.weight = randomNumber(1, 500);
-	/*this.remove = function() {
-
-	}*/
 }
 
 
