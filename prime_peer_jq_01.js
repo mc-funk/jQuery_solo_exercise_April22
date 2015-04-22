@@ -48,7 +48,7 @@ $(document).ready(function(){
 		$(this).parent().remove();;
 	});
 
-//Use .on("dblclick"), which can also can be used as .dblclick, but 
+//Use .on("dblclick"), which can also can be used as .dblclick, but not sure how to specify ".dblRemoveButton" in that case. 
 	$("#peopleList").on("dblclick", ".dblRemoveButton", function(event){
 		$(this).closest($(".thisPerson")).remove(); 
 		i--;
